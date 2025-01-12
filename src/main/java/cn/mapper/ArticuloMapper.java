@@ -25,6 +25,8 @@ public interface ArticuloMapper extends BaseMapper<Articulo> {
         @Param(value = "precioDetalle") String precioDetalle
     );
 
+    Articulo queryOne(@Param(value = "code") String code);
+
     @Select("select ArticuloID,CodigoBarra,NombreES,PrecioDetalle,UsarPrecioPorCantidad,Precio1,Descuento1,Cantidad1,Precio2,Descuento2,Cantidad2,Precio3,Descuento3,Cantidad3,Precio4,Descuento4,Cantidad4,Precio5,Descuento5,Cantidad5,Precio6,Descuento6 from articulo where ArticuloID like CONCAT('%',#{idOrCode},'%') or CodigoBarra like CONCAT('%',#{idOrCode},'%')  ")
     public List<Articulo> getByArticuloIDOrCodigoBarra(@Param("idOrCode") String idOrCode);
 
@@ -87,6 +89,6 @@ public interface ArticuloMapper extends BaseMapper<Articulo> {
     @Select("SELECT COUNT(*)  FROM articulo  WHERE ArticuloID LIKE CONCAT(#{codePrefix}, '%') AND LENGTH(ArticuloID) = #{codeLength}")
     public int countByPrefixAndLength(@Param("codePrefix") String codePrefix, @Param("codeLength") int codeLength);
 
-    // public void insertArticulo(Articulo articulo);
+    public void insertArticulo(Articulo articulo);
 
 }

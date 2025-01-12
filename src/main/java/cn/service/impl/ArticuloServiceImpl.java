@@ -1,25 +1,22 @@
 package cn.service.impl;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
 import cn.entity.Articulo;
+import cn.entity.ArticuloClass;
 import cn.entity.ArticuloDibujo;
 import cn.entity.Proveedor;
+import cn.mapper.ArticuloMapper;
 import cn.param.ZbmParam;
+import cn.service.ArticuloService;
+import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import com.alibaba.druid.util.StringUtils;
-
-import cn.entity.ArticuloClass;
-import cn.mapper.ArticuloMapper;
-import cn.service.ArticuloService;
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author haokai
@@ -39,47 +36,17 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
 
     @Override
     public Articulo scan(Articulo ac) {
-        Articulo articulo = articuloMapper.getById(ac.getArticuloID());
+        Articulo articulo = articuloMapper.getById(ac.getArticuloid());
         if (ObjectUtils.isEmpty(articulo)) {
-            return articuloMapper.getByCoding(ac.getArticuloID());
+            return articuloMapper.getByCoding(ac.getArticuloid());
         }
         return articulo;
     }
 
     @Override
     public int edit(Articulo ac) {
-        if (StringUtils.isEmpty(ac.getArticuloID())) {
-            return articuloMapper.updateByCode(ac.getCodigoBarra(), ac.getPrecioDetalle());
-        }
-
-        // boolean dibujo_b = !org.springframework.util.StringUtils.isEmpty(ac.getDibujo());
-        // byte[] dibujo = ac.getDibujo();
-
-        ac.setDibujoID(null);
-//        ac.setHaydibujo(-1);
-
-
-        if(ac.getStockda()!=null) {
-        	int count = articuloMapper.getStock(ac.getArticuloID());
-        	if(count>0) {
-            	
-        		articuloMapper.updateStock(ac.getStockda(),ac.getArticuloID());
-        	}else {
-        		articuloMapper.insertStock(ac.getArticuloID(),ac.getStockda());
-        	}
-        }
-        if (ac.getEmpresaID() == 0) {
-            ac.setEmpresaID(null);
-        }
-        int ret = articuloMapper.updateById(ac);
-
-        return ret;
-    }
-
-    @Override
-    public int update(Articulo ac) {
-        if (StringUtils.isEmpty(ac.getArticuloID())) {
-            return articuloMapper.updateByCode(ac.getCodigoBarra(), ac.getPrecioDetalle());
+        if (StringUtils.isEmpty(ac.getArticuloid())) {
+            return articuloMapper.updateByCode(ac.getCodigobarra(), ac.getPreciodetalle());
         }
 
         boolean dibujo_b = !org.springframework.util.StringUtils.isEmpty(ac.getDibujo());
@@ -90,19 +57,49 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
 
 
         if(ac.getStockda()!=null) {
-            int count = articuloMapper.getStock(ac.getArticuloID());
+        	int count = articuloMapper.getStock(ac.getArticuloid());
+        	if(count>0) {
+            	
+        		articuloMapper.updateStock(ac.getStockda(),ac.getArticuloid());
+        	}else {
+        		articuloMapper.insertStock(ac.getArticuloid(),ac.getStockda());
+        	}
+        }
+        if (ac.getEmpresaid().equals("")) {
+            ac.setEmpresaid(null);
+        }
+        int ret = articuloMapper.updateById(ac);
+
+        return ret;
+    }
+
+    @Override
+    public int update(Articulo ac) {
+        if (StringUtils.isEmpty(ac.getArticuloid())) {
+            return articuloMapper.updateByCode(ac.getCodigobarra(), ac.getPreciodetalle());
+        }
+
+        boolean dibujo_b = !org.springframework.util.StringUtils.isEmpty(ac.getDibujo());
+        byte[] dibujo = ac.getDibujo();
+
+        ac.setDibujo(null);
+//        ac.setHaydibujo(-1);
+
+
+        if(ac.getStockda()!=null) {
+            int count = articuloMapper.getStock(ac.getArticuloid());
             if(count>0) {
 
-                articuloMapper.updateStock(ac.getStockda(),ac.getArticuloID());
+                articuloMapper.updateStock(ac.getStockda(),ac.getArticuloid());
             }else {
-                articuloMapper.insertStock(ac.getArticuloID(),ac.getStockda());
+                articuloMapper.insertStock(ac.getArticuloid(),ac.getStockda());
             }
         }
 
 
 
         if (dibujo_b){
-            List<ArticuloDibujo>  articuloDibujos = articuloMapper.getDibujosCountById(ac.getArticuloID());
+            List<ArticuloDibujo>  articuloDibujos = articuloMapper.getDibujosCountById(ac.getArticuloid());
             if (articuloDibujos.size() > 0) {
                 ArticuloDibujo articuloDibujo = articuloDibujos.get(0);
                 //直接更新第1张序号照片
@@ -112,7 +109,7 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
                 int curTotal = articuloMapper.getDibujoCount() + 1;
 
                 ArticuloDibujo articuloDibujo = new ArticuloDibujo();
-                articuloDibujo.setArticuloid(ac.getArticuloID());
+                articuloDibujo.setArticuloid(ac.getArticuloid());
                 articuloDibujo.setDibujoMD5(UUID.randomUUID().toString());
                 articuloDibujo.setDibujoID(curTotal);
                 articuloDibujo.setOrdenNo(1);//从1开始
@@ -121,11 +118,11 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
                 //再真的新增图片数据
                 articuloMapper.insertDibujoById(articuloDibujo.getDibujoID(), dibujo);
 
-                ac.setDibujoID((long) curTotal);
+                ac.setDibujoid(curTotal);
             }
         }
-        if (ac.getEmpresaID() == 0) {
-            ac.setEmpresaID(null);
+        if (ac.getEmpresaid().equals("")) {
+            ac.setEmpresaid(null);
             ac.setProveedordd(null);
         }
         int ret = articuloMapper.updateById(ac);
@@ -142,17 +139,17 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
         ac.setDibujo(null);
 //        ac.setHaydibujo(-1);
         if(ac.getStockda()!=null) {
-        	int count = articuloMapper.getStock(ac.getArticuloID());
+        	int count = articuloMapper.getStock(ac.getArticuloid());
         	if(count>0) {
         	
-        		articuloMapper.updateStock(ac.getStockda(),ac.getArticuloID());
+        		articuloMapper.updateStock(ac.getStockda(),ac.getArticuloid());
         	}else {
-        		articuloMapper.insertStock(ac.getArticuloID(),ac.getStockda());
+        		articuloMapper.insertStock(ac.getArticuloid(),ac.getStockda());
         	}
         	
         }
 
-        List<ArticuloDibujo>  articuloDibujos = articuloMapper.getDibujosCountById(ac.getArticuloID());
+        List<ArticuloDibujo>  articuloDibujos = articuloMapper.getDibujosCountById(ac.getArticuloid());
         if (articuloDibujos.size() > 0) {
             ArticuloDibujo articuloDibujo = articuloDibujos.get(0);
             //直接更新第1张序号照片
@@ -164,7 +161,7 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
                 int curTotal = articuloMapper.getDibujoCount() + 1;
 
                 ArticuloDibujo articuloDibujo = new ArticuloDibujo();
-                articuloDibujo.setArticuloid(ac.getArticuloID());
+                articuloDibujo.setArticuloid(ac.getArticuloid());
                 articuloDibujo.setDibujoMD5(UUID.randomUUID().toString());
                 articuloDibujo.setDibujoID(curTotal);
                 articuloDibujo.setOrdenNo(1);//从1开始
@@ -174,13 +171,13 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
                 articuloMapper.insertDibujoById(articuloDibujo.getDibujoID(), dibujo);
 
                 //最后更新上皮你的图片字段信息
-                ac.setDibujoID(Long.valueOf(curTotal));
+                ac.setDibujoid(curTotal);
             }
 
 
         }
-        if (ac.getEmpresaID() == 0) {
-            ac.setEmpresaID(null);
+        if (ac.getEmpresaid().equals("")) {
+            ac.setEmpresaid(null);
             ac.setProveedordd(null);
         }
         int ret =  articuloMapper.insert(ac);
@@ -222,16 +219,6 @@ public class ArticuloServiceImpl extends ServiceImpl<ArticuloMapper, Articulo> i
         return generateArticuloCode(zbmParam.getCodePrefix(),zbmParam.getCodeLength());
     }
 
-    @Override
-    public Articulo queryOne(String articuloID) {
-        QueryWrapper<Articulo> queryWrapper = new QueryWrapper<>();
-        if (articuloID != null && !"".equals(articuloID)) {
-            // 查询条件
-            // (ArticuloID =  #{code} or CodigoBarra =  #{code})
-            queryWrapper.eq("ArticuloID", articuloID).or().eq("CodigoBarra", articuloID);
-        }
-        return getOne(queryWrapper);
-    }
 
     private String generateArticuloCode(String codePrefix, int codeLength) {
         int count = articuloMapper.countByPrefixAndLength(codePrefix, codeLength);

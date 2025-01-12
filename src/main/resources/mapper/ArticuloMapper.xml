@@ -2,42 +2,42 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="generator.mapper.ArticuloMapper">
+<mapper namespace="cn.mapper.ArticuloMapper">
 
     <resultMap id="BaseResultMap" type="cn.entity.Articulo">
-            <id property="articuloID" column="ArticuloID" jdbcType="VARCHAR"/>
-            <result property="codigoBarra" column="CodigoBarra" jdbcType="VARCHAR"/>
-            <result property="prop1Titulo" column="Prop1Titulo" jdbcType="VARCHAR"/>
-            <result property="prop2Titulo" column="Prop2Titulo" jdbcType="VARCHAR"/>
-            <result property="propCount" column="PropCount" jdbcType="TINYINT"/>
-            <result property="nombreES" column="NombreES" jdbcType="VARCHAR"/>
-            <result property="nombreCN" column="NombreCN" jdbcType="VARCHAR"/>
+            <id property="articuloid" column="ArticuloID" jdbcType="VARCHAR"/>
+            <result property="codigobarra" column="CodigoBarra" jdbcType="VARCHAR"/>
+            <!--<result property="prop1Titulo" column="Prop1Titulo" jdbcType="VARCHAR"/>-->
+            <!--<result property="prop2Titulo" column="Prop2Titulo" jdbcType="VARCHAR"/>-->
+            <!--<result property="propCount" column="PropCount" jdbcType="TINYINT"/>-->
+            <result property="nombrees" column="NombreES" jdbcType="VARCHAR"/>
+            <result property="nombrecn" column="NombreCN" jdbcType="VARCHAR"/>
             <result property="descripcion" column="Descripcion" jdbcType="VARCHAR"/>
-            <result property="precioDetalle" column="PrecioDetalle" jdbcType="DECIMAL"/>
-            <result property="precioDomicilio" column="PrecioDomicilio" jdbcType="DECIMAL"/>
-            <result property="precioSocio" column="PrecioSocio" jdbcType="DECIMAL"/>
-            <result property="precioMayor" column="PrecioMayor" jdbcType="DECIMAL"/>
-            <result property="precioFactura" column="PrecioFactura" jdbcType="DECIMAL"/>
-            <result property="precioInternet" column="PrecioInternet" jdbcType="DECIMAL"/>
-            <result property="precioAmigo" column="PrecioAmigo" jdbcType="DECIMAL"/>
-            <result property="precioEspecial" column="PrecioEspecial" jdbcType="DECIMAL"/>
-            <result property="precioOferta" column="PrecioOferta" jdbcType="DECIMAL"/>
-            <result property="precioCoste" column="PrecioCoste" jdbcType="DECIMAL"/>
-            <result property="cantidadPorUnidad" column="CantidadPorUnidad" jdbcType="DECIMAL"/>
-            <result property="cantidadPorUnidad2" column="CantidadPorUnidad2" jdbcType="DECIMAL"/>
-            <result property="volumenPeso" column="VolumenPeso" jdbcType="DECIMAL"/>
-            <result property="unidadUsarRegla" column="UnidadUsarRegla" jdbcType="SMALLINT"/>
-            <result property="claseID" column="ClaseID" jdbcType="SMALLINT"/>
-            <result property="unidadNombre" column="UnidadNombre" jdbcType="VARCHAR"/>
-            <result property="fechaPrecioCoste" column="FechaPrecioCoste" jdbcType="DATE"/>
+            <result property="preciodetalle" column="PrecioDetalle" jdbcType="DECIMAL"/>
+            <result property="preciodomicilio" column="PrecioDomicilio" jdbcType="DECIMAL"/>
+            <result property="preciosocio" column="PrecioSocio" jdbcType="DECIMAL"/>
+            <result property="preciomayor" column="PrecioMayor" jdbcType="DECIMAL"/>
+            <result property="preciofactura" column="PrecioFactura" jdbcType="DECIMAL"/>
+            <result property="preciointernet" column="PrecioInternet" jdbcType="DECIMAL"/>
+            <result property="precioamigo" column="PrecioAmigo" jdbcType="DECIMAL"/>
+            <result property="precioespecial" column="PrecioEspecial" jdbcType="DECIMAL"/>
+            <result property="preciooferta" column="PrecioOferta" jdbcType="DECIMAL"/>
+            <result property="preciocoste" column="PrecioCoste" jdbcType="DECIMAL"/>
+            <result property="cantidadporunidad" column="CantidadPorUnidad" jdbcType="DECIMAL"/>
+            <result property="cantidadporunidad2" column="CantidadPorUnidad2" jdbcType="DECIMAL"/>
+            <result property="volumenpeso" column="VolumenPeso" jdbcType="DECIMAL"/>
+            <result property="unidadusarregla" column="UnidadUsarRegla" jdbcType="SMALLINT"/>
+            <result property="claseid" column="ClaseID" jdbcType="SMALLINT"/>
+            <result property="unidadnombre" column="UnidadNombre" jdbcType="VARCHAR"/>
+            <result property="fechapreciocoste" column="FechaPrecioCoste" jdbcType="DATE"/>
             <result property="descuento" column="Descuento" jdbcType="DECIMAL"/>
-            <result property="facturaPorcentaje" column="FacturaPorcentaje" jdbcType="DECIMAL"/>
-            <result property="fechaCaducada" column="FechaCaducada" jdbcType="DATE"/>
-            <result property="empresaID" column="EmpresaID" jdbcType="BIGINT"/>
+            <result property="facturaporcentaje" column="FacturaPorcentaje" jdbcType="DECIMAL"/>
+            <result property="fechacaducada" column="FechaCaducada" jdbcType="DATE"/>
+            <result property="empresaid" column="EmpresaID" jdbcType="BIGINT"/>
             <result property="oferta" column="Oferta" jdbcType="TINYINT"/>
             <result property="privado" column="Privado" jdbcType="TINYINT"/>
-            <result property="usarPrecioPorCantidad" column="UsarPrecioPorCantidad" jdbcType="TINYINT"/>
-            <result property="usarDescuentoPorCantidad" column="UsarDescuentoPorCantidad" jdbcType="TINYINT"/>
+            <result property="usarprecioporcantidad" column="UsarPrecioPorCantidad" jdbcType="TINYINT"/>
+            <result property="usardescuentoporcantidad" column="UsarDescuentoPorCantidad" jdbcType="TINYINT"/>
             <result property="precio1" column="Precio1" jdbcType="DECIMAL"/>
             <result property="descuento1" column="Descuento1" jdbcType="DECIMAL"/>
             <result property="cantidad1" column="Cantidad1" jdbcType="DECIMAL"/>
@@ -55,35 +55,35 @@
             <result property="cantidad5" column="Cantidad5" jdbcType="DECIMAL"/>
             <result property="precio6" column="Precio6" jdbcType="DECIMAL"/>
             <result property="descuento6" column="Descuento6" jdbcType="DECIMAL"/>
-            <result property="nombre1" column="Nombre1" jdbcType="VARCHAR"/>
-            <result property="nombre2" column="Nombre2" jdbcType="VARCHAR"/>
-            <result property="nombre3" column="Nombre3" jdbcType="VARCHAR"/>
-            <result property="nombre4" column="Nombre4" jdbcType="VARCHAR"/>
-            <result property="nombre5" column="Nombre5" jdbcType="VARCHAR"/>
-            <result property="nombre6" column="Nombre6" jdbcType="VARCHAR"/>
-            <result property="nombre7" column="Nombre7" jdbcType="VARCHAR"/>
-            <result property="nombre8" column="Nombre8" jdbcType="VARCHAR"/>
-            <result property="nombre9" column="Nombre9" jdbcType="VARCHAR"/>
-            <result property="sitioEnAlmacen" column="SitioEnAlmacen" jdbcType="VARCHAR"/>
-            <result property="sitioEnEstante" column="SitioEnEstante" jdbcType="VARCHAR"/>
-            <result property="serialNo" column="SerialNo" jdbcType="VARCHAR"/>
-            <result property="miniStock" column="MiniStock" jdbcType="DECIMAL"/>
-            <result property="maxiStock" column="MaxiStock" jdbcType="DECIMAL"/>
-            <result property="dibujoID" column="DibujoID" jdbcType="BIGINT"/>
-            <result property="recomendado" column="Recomendado" jdbcType="TINYINT"/>
-            <result property="descuentoCambioProhibido" column="DescuentoCambioProhibido" jdbcType="TINYINT"/>
-            <result property="aliIngrediente" column="AliIngrediente" jdbcType="VARCHAR"/>
-            <result property="aliPesoTotal" column="AliPesoTotal" jdbcType="VARCHAR"/>
-            <result property="aliPesoNeto" column="AliPesoNeto" jdbcType="VARCHAR"/>
-            <result property="aliFechaCaducada" column="AliFechaCaducada" jdbcType="VARCHAR"/>
-            <result property="aliLugarFabricante" column="AliLugarFabricante" jdbcType="VARCHAR"/>
-            <result property="aliImportador" column="AliImportador" jdbcType="VARCHAR"/>
-            <result property="aliNumeroSanitario" column="AliNumeroSanitario" jdbcType="VARCHAR"/>
-            <result property="aliNumeroLote" column="AliNumeroLote" jdbcType="VARCHAR"/>
-            <result property="aliAdjuncion" column="AliAdjuncion" jdbcType="VARCHAR"/>
-            <result property="multiCodigo" column="MultiCodigo" jdbcType="VARCHAR"/>
-            <result property="ordenNo" column="OrdenNo" jdbcType="INTEGER"/>
-            <result property="ordenNoFinal" column="OrdenNoFinal" jdbcType="BIGINT"/>
+            <!--<result property="nombre1" column="Nombre1" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre2" column="Nombre2" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre3" column="Nombre3" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre4" column="Nombre4" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre5" column="Nombre5" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre6" column="Nombre6" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre7" column="Nombre7" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre8" column="Nombre8" jdbcType="VARCHAR"/>-->
+            <!--<result property="nombre9" column="Nombre9" jdbcType="VARCHAR"/>-->
+            <!--<result property="sitioenalmacen" column="SitioEnAlmacen" jdbcType="VARCHAR"/>-->
+            <!--<result property="sitioEnEstante" column="SitioEnEstante" jdbcType="VARCHAR"/>-->
+            <!--<result property="serialNo" column="SerialNo" jdbcType="VARCHAR"/>-->
+            <result property="ministock" column="MiniStock" jdbcType="DECIMAL"/>
+            <result property="maxistock" column="MaxiStock" jdbcType="DECIMAL"/>
+            <result property="dibujoid" column="DibujoID" jdbcType="BIGINT"/>
+            <!--<result property="recomendado" column="Recomendado" jdbcType="TINYINT"/>-->
+            <result property="descuentocambioprohibido" column="DescuentoCambioProhibido" jdbcType="TINYINT"/>
+            <!--<result property="aliIngrediente" column="AliIngrediente" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliPesoTotal" column="AliPesoTotal" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliPesoNeto" column="AliPesoNeto" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliFechaCaducada" column="AliFechaCaducada" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliLugarFabricante" column="AliLugarFabricante" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliImportador" column="AliImportador" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliNumeroSanitario" column="AliNumeroSanitario" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliNumeroLote" column="AliNumeroLote" jdbcType="VARCHAR"/>-->
+            <!--<result property="aliAdjuncion" column="AliAdjuncion" jdbcType="VARCHAR"/>-->
+            <!--<result property="multiCodigo" column="MultiCodigo" jdbcType="VARCHAR"/>-->
+            <!--<result property="ordenNo" column="OrdenNo" jdbcType="INTEGER"/>-->
+            <!--<result property="ordenNoFinal" column="OrdenNoFinal" jdbcType="BIGINT"/>-->
             <result property="bloqueado" column="Bloqueado" jdbcType="TINYINT"/>
             <result property="observacion" column="Observacion" jdbcType="VARCHAR"/>
     </resultMap>
@@ -117,4 +117,15 @@
         AliAdjuncion,MultiCodigo,OrdenNo,
         OrdenNoFinal,Bloqueado,Observacion
     </sql>
+
+
+    <select id="queryOne" resultType="cn.entity.Articulo">
+        SELECT * FROM articulo
+        WHERE 1=1
+        <if test="code != null and code != ''">
+            <![CDATA[
+                    and (ArticuloID =  #{code} or CodigoBarra =  #{code})
+                ]]>
+        </if>
+    </select>
 </mapper>

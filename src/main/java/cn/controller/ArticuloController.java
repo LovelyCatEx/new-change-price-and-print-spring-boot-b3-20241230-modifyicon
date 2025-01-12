@@ -1,22 +1,20 @@
 package cn.controller;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
 import cn.entity.Articulo;
 import cn.entity.Proveedor;
 import cn.param.ZbmParam;
+import cn.service.ArticuloService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.service.ArticuloService;
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/articulo")
@@ -41,17 +39,17 @@ public class ArticuloController {
 
         if(articulo != null){
             // 如果值为 null，默认为 0
-            BigDecimal preciocoste = articulo.getPrecioCoste() != null ? articulo.getPrecioCoste().stripTrailingZeros() : BigDecimal.ZERO;
-            BigDecimal preciodetalle = articulo.getPrecioDetalle() != null ? articulo.getPrecioDetalle().stripTrailingZeros() : BigDecimal.ZERO;
-            BigDecimal preciomayor = articulo.getPrecioMayor() != null ? articulo.getPrecioMayor().stripTrailingZeros() : BigDecimal.ZERO;
+            BigDecimal preciocoste = articulo.getPreciocoste() != null ? articulo.getPreciocoste().stripTrailingZeros() : BigDecimal.ZERO;
+            BigDecimal preciodetalle = articulo.getPreciodetalle() != null ? articulo.getPreciodetalle().stripTrailingZeros() : BigDecimal.ZERO;
+            BigDecimal preciomayor = articulo.getPreciomayor() != null ? articulo.getPreciomayor().stripTrailingZeros() : BigDecimal.ZERO;
 
             String stockda = articulo.getStockda();
             BigDecimal stockdaValue = stockda != null ? new BigDecimal(stockda).stripTrailingZeros() : BigDecimal.ZERO;
             stockda = stockdaValue.toPlainString(); // 转换为字符串表示
 
-            articulo.setPrecioCoste(preciocoste);
-            articulo.setPrecioDetalle(preciodetalle);
-            articulo.setPrecioMayor(preciomayor);
+            articulo.setPreciocoste(preciocoste);
+            articulo.setPreciodetalle(preciodetalle);
+            articulo.setPreciomayor(preciomayor);
             articulo.setStockda(stockda);
         }
 
@@ -104,8 +102,6 @@ public class ArticuloController {
         List<Proveedor> proveedor2 = new ArrayList<>();
 
         Proveedor proveedor1 = new Proveedor();
-        // proveedor1.setEmpresaID("");
-        // TODO: 源主键由 VARCHAR 变为 BIGINT
         proveedor1.setEmpresaID(0L);
         proveedor1.setNombreES("");
         proveedor2.add(proveedor1);
@@ -122,20 +118,20 @@ public class ArticuloController {
         Map<String,Object> map = new HashMap<String, Object>();
 
         int num = articuloService.updateByArticuloIDOrCodigoBarra(
-                ac.getUsarPrecioPorCantidad(),
-                ac.getPrecioDetalle(),
-                ac.getPrecio1(),ac.getDescuento1().floatValue(),ac.getCantidad1(),
-                ac.getPrecio2(),ac.getDescuento2().floatValue(),ac.getCantidad2(),
-                ac.getPrecio3(),ac.getDescuento3().floatValue(),ac.getCantidad3(),
-                ac.getPrecio4(),ac.getDescuento4().floatValue(),ac.getCantidad4(),
-                ac.getPrecio5(),ac.getDescuento5().floatValue(),ac.getCantidad5(),
+                ac.getUsarprecioporcantidad(),
+                ac.getPreciodetalle(),
+                ac.getPrecio1(),ac.getDescuento1(),ac.getCantidad1(),
+                ac.getPrecio2(),ac.getDescuento2(),ac.getCantidad2(),
+                ac.getPrecio3(),ac.getDescuento3(),ac.getCantidad3(),
+                ac.getPrecio4(),ac.getDescuento4(),ac.getCantidad4(),
+                ac.getPrecio5(),ac.getDescuento5(),ac.getCantidad5(),
                 ac.getPrecio6(),
-                ac.getArticuloID()
+                ac.getArticuloid()
         );
 
         map.put("code","200");
         map.put("message", "修改按量定价信息成功"+num);
-        map.put("data", articuloService.getByArticuloIDOrCodigoBarra(ac.getArticuloID()).get(0));
+        map.put("data", articuloService.getByArticuloIDOrCodigoBarra(ac.getArticuloid()).get(0));
         return map;
     }
 
@@ -144,7 +140,7 @@ public class ArticuloController {
     public Map<String , Object > getByArticuloIDOrCodigoBarra(@RequestBody Articulo ac){
 
 
-        List<Articulo> articuloList = articuloService.getByArticuloIDOrCodigoBarra(ac.getArticuloID());
+        List<Articulo> articuloList = articuloService.getByArticuloIDOrCodigoBarra(ac.getArticuloid());
         if(articuloList.size() > 1 ){
             Map<String,Object> map = new HashMap<String, Object>();
             map.put("code","1001");
@@ -161,7 +157,7 @@ public class ArticuloController {
             Map<String,Object> map = new HashMap<String, Object>();
             map.put("code","200");
             map.put("message", "查询产品信息成功");
-            map.put("data", articuloService.getByArticuloIDOrCodigoBarra(ac.getArticuloID()).get(0));
+            map.put("data", articuloService.getByArticuloIDOrCodigoBarra(ac.getArticuloid()).get(0));
             return map;
         }
     }

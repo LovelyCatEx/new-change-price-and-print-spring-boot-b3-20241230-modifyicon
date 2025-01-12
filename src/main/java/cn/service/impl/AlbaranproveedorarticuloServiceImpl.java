@@ -3,6 +3,7 @@ package cn.service.impl;
 import cn.entity.Articulo;
 import cn.service.ArticuloService;
 import com.alibaba.druid.util.StringUtils;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.entity.Albaranproveedorarticulo;
 import cn.service.AlbaranproveedorarticuloService;
@@ -32,7 +33,7 @@ public class AlbaranproveedorarticuloServiceImpl extends ServiceImpl<Albaranprov
     @Override
     public Albaranproveedorarticulo queryOne(String code, String ArticuloID) {
         Albaranproveedorarticulo albaranproveedorarticulo = albaranproveedorarticuloMapper.queryOne(code, ArticuloID);
-        Articulo articulo = articuloService.queryOne(ArticuloID);
+        Articulo articulo = articuloService.getArticuloMapper().queryOne(ArticuloID);
         if (albaranproveedorarticulo != null && articulo!=null) {
             albaranproveedorarticulo.setArticulo(articulo);
         }
@@ -43,7 +44,7 @@ public class AlbaranproveedorarticuloServiceImpl extends ServiceImpl<Albaranprov
     public List<Albaranproveedorarticulo> queryList(String code, String ArticuloID, String Bloqueado) {
         List<Albaranproveedorarticulo> albaranproveedorarticulos = albaranproveedorarticuloMapper.queryList(code, ArticuloID, Bloqueado);
         for (Albaranproveedorarticulo albaranproveedorarticulo : albaranproveedorarticulos) {
-            Articulo articulo = articuloService.queryOne(albaranproveedorarticulo.getArticuloID());
+            Articulo articulo = articuloService.getArticuloMapper().queryOne(albaranproveedorarticulo.getArticuloID());
             if (articulo != null) {
                 albaranproveedorarticulo.setArticulo(articulo);
             }
