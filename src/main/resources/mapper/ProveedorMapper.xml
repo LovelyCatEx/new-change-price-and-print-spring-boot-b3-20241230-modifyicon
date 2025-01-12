@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mapper.ProveedorMapper">
+
+    <resultMap id="BaseResultMap" type="cn.entity.Proveedor">
+            <id property="empresaID" column="EmpresaID" jdbcType="BIGINT"/>
+            <result property="nombreES" column="NombreES" jdbcType="VARCHAR"/>
+            <result property="nombreCN" column="NombreCN" jdbcType="VARCHAR"/>
+            <result property="CIF" column="CIF" jdbcType="VARCHAR"/>
+            <result property="numeroIVA" column="NumeroIVA" jdbcType="VARCHAR"/>
+            <result property="domicilio" column="Domicilio" jdbcType="VARCHAR"/>
+            <result property="codigoPostal" column="CodigoPostal" jdbcType="VARCHAR"/>
+            <result property="poblacion" column="Poblacion" jdbcType="VARCHAR"/>
+            <result property="provincia" column="Provincia" jdbcType="VARCHAR"/>
+            <result property="pais" column="Pais" jdbcType="VARCHAR"/>
+            <result property="countryID" column="CountryID" jdbcType="VARCHAR"/>
+            <result property="personaContacto" column="PersonaContacto" jdbcType="VARCHAR"/>
+            <result property="sexo" column="Sexo" jdbcType="SMALLINT"/>
+            <result property="cumpleano" column="Cumpleano" jdbcType="DATE"/>
+            <result property="telefono" column="Telefono" jdbcType="VARCHAR"/>
+            <result property="telefono2" column="Telefono2" jdbcType="VARCHAR"/>
+            <result property="fax" column="Fax" jdbcType="VARCHAR"/>
+            <result property="email" column="Email" jdbcType="VARCHAR"/>
+            <result property="web" column="Web" jdbcType="VARCHAR"/>
+            <result property="IM" column="IM" jdbcType="VARCHAR"/>
+            <result property="IVAClase" column="IVAClase" jdbcType="TINYINT"/>
+            <result property="reglaIVA" column="ReglaIVA" jdbcType="TINYINT"/>
+            <result property="facturaPorcentaje" column="FacturaPorcentaje" jdbcType="DECIMAL"/>
+            <result property="facturaDescuento" column="FacturaDescuento" jdbcType="DECIMAL"/>
+            <result property="facturaSDIID" column="FacturaSDIID" jdbcType="VARCHAR"/>
+            <result property="facturaCEC" column="FacturaCEC" jdbcType="VARCHAR"/>
+            <result property="bancoCuentaNo" column="BancoCuentaNo" jdbcType="VARCHAR"/>
+            <result property="necesitaFactura" column="NecesitaFactura" jdbcType="TINYINT"/>
+            <result property="autoEmailDocumento" column="AutoEmailDocumento" jdbcType="TINYINT"/>
+            <result property="descuento" column="Descuento" jdbcType="DECIMAL"/>
+            <result property="descuentoSerie" column="DescuentoSerie" jdbcType="TINYINT"/>
+            <result property="descuentoExtra" column="DescuentoExtra" jdbcType="DECIMAL"/>
+            <result property="maxSobregiro" column="MaxSobregiro" jdbcType="DECIMAL"/>
+            <result property="serSocio" column="SerSocio" jdbcType="TINYINT"/>
+            <result property="tarjetaSocioID" column="TarjetaSocioID" jdbcType="VARCHAR"/>
+            <result property="claseID" column="ClaseID" jdbcType="SMALLINT"/>
+            <result property="agenteID" column="AgenteID" jdbcType="SMALLINT"/>
+            <result property="transportistaID" column="TransportistaID" jdbcType="SMALLINT"/>
+            <result property="transporteModoID" column="TransporteModoID" jdbcType="SMALLINT"/>
+            <result property="envioGasto" column="EnvioGasto" jdbcType="DECIMAL"/>
+            <result property="cocheNo" column="CocheNo" jdbcType="VARCHAR"/>
+            <result property="chinoProhibido" column="ChinoProhibido" jdbcType="TINYINT"/>
+            <result property="extrajero" column="Extrajero" jdbcType="TINYINT"/>
+            <result property="idioma" column="Idioma" jdbcType="TINYINT"/>
+            <result property="idiomaSerie" column="IdiomaSerie" jdbcType="TINYINT"/>
+            <result property="precioUsado" column="PrecioUsado" jdbcType="TINYINT"/>
+            <result property="loginEnabled" column="LoginEnabled" jdbcType="TINYINT"/>
+            <result property="imprimirArticuloOrden" column="ImprimirArticuloOrden" jdbcType="SMALLINT"/>
+            <result property="bloqueado" column="Bloqueado" jdbcType="TINYINT"/>
+            <result property="observacion" column="Observacion" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        EmpresaID,NombreES,NombreCN,
+        CIF,NumeroIVA,Domicilio,
+        CodigoPostal,Poblacion,Provincia,
+        Pais,CountryID,PersonaContacto,
+        Sexo,Cumpleano,Telefono,
+        Telefono2,Fax,Email,
+        Web,IM,IVAClase,
+        ReglaIVA,FacturaPorcentaje,FacturaDescuento,
+        FacturaSDIID,FacturaCEC,BancoCuentaNo,
+        NecesitaFactura,AutoEmailDocumento,Descuento,
+        DescuentoSerie,DescuentoExtra,MaxSobregiro,
+        SerSocio,TarjetaSocioID,ClaseID,
+        AgenteID,TransportistaID,TransporteModoID,
+        EnvioGasto,CocheNo,ChinoProhibido,
+        Extrajero,Idioma,IdiomaSerie,
+        PrecioUsado,LoginEnabled,ImprimirArticuloOrden,
+        Bloqueado,Observacion
+    </sql>
+</mapper>

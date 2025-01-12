@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mapper.AlbaranproveedorMapper">
+
+    <resultMap id="BaseResultMap" type="cn.entity.Albaranproveedor">
+            <id property="documentoNo" column="DocumentoNo" jdbcType="BIGINT"/>
+            <result property="documentoNoEnServidor" column="DocumentoNoEnServidor" jdbcType="BIGINT"/>
+            <result property="documentoNoOriginal" column="DocumentoNoOriginal" jdbcType="BIGINT"/>
+            <result property="empresaID" column="EmpresaID" jdbcType="BIGINT"/>
+            <result property="sucursalID" column="SucursalID" jdbcType="SMALLINT"/>
+            <result property="descuento" column="Descuento" jdbcType="DECIMAL"/>
+            <result property="descuento2" column="Descuento2" jdbcType="DECIMAL"/>
+            <result property="descuentoDirecto" column="DescuentoDirecto" jdbcType="DECIMAL"/>
+            <result property="reglaIVA" column="ReglaIVA" jdbcType="TINYINT"/>
+            <result property="IVASerie" column="IVASerie" jdbcType="TINYINT"/>
+            <result property="precioUsado" column="PrecioUsado" jdbcType="TINYINT"/>
+            <result property="total" column="Total" jdbcType="DECIMAL"/>
+            <result property="descuentoTotal" column="DescuentoTotal" jdbcType="DECIMAL"/>
+            <result property="descuentoExtra" column="DescuentoExtra" jdbcType="DECIMAL"/>
+            <result property="ganancias" column="Ganancias" jdbcType="DECIMAL"/>
+            <result property="pagoTotal" column="PagoTotal" jdbcType="DECIMAL"/>
+            <result property="cantidadTotal" column="CantidadTotal" jdbcType="DECIMAL"/>
+            <result property="paqueteTotal" column="PaqueteTotal" jdbcType="DECIMAL"/>
+            <result property="cajaTotal" column="CajaTotal" jdbcType="DECIMAL"/>
+            <result property="volumenPesoTotal" column="VolumenPesoTotal" jdbcType="DECIMAL"/>
+            <result property="lineaTotal" column="LineaTotal" jdbcType="INTEGER"/>
+            <result property="fecha" column="Fecha" jdbcType="DATE"/>
+            <result property="fechaEntrada" column="FechaEntrada" jdbcType="TIMESTAMP"/>
+            <result property="fechaOriginal" column="FechaOriginal" jdbcType="TIMESTAMP"/>
+            <result property="tiempoUltimoEditar" column="TiempoUltimoEditar" jdbcType="TIMESTAMP"/>
+            <result property="tiempoUltimoActualizar" column="TiempoUltimoActualizar" jdbcType="TIMESTAMP"/>
+            <result property="documentoOrigenTipo" column="DocumentoOrigenTipo" jdbcType="VARCHAR"/>
+            <result property="documentoOrigenNo" column="DocumentoOrigenNo" jdbcType="BIGINT"/>
+            <result property="documentoDestinoTipo" column="DocumentoDestinoTipo" jdbcType="VARCHAR"/>
+            <result property="documentoDestinoNo" column="DocumentoDestinoNo" jdbcType="BIGINT"/>
+            <result property="agenteID" column="AgenteID" jdbcType="SMALLINT"/>
+            <result property="transportistaID" column="TransportistaID" jdbcType="SMALLINT"/>
+            <result property="transporteModoID" column="TransporteModoID" jdbcType="SMALLINT"/>
+            <result property="envioGasto" column="EnvioGasto" jdbcType="DECIMAL"/>
+            <result property="operadorID" column="OperadorID" jdbcType="SMALLINT"/>
+            <result property="verificadorID" column="VerificadorID" jdbcType="SMALLINT"/>
+            <result property="almacenID" column="AlmacenID" jdbcType="SMALLINT"/>
+            <result property="documentoAdjuntoSimbolo" column="DocumentoAdjuntoSimbolo" jdbcType="VARCHAR"/>
+            <result property="ordenadorNombre" column="OrdenadorNombre" jdbcType="VARCHAR"/>
+            <result property="deviceUUID" column="DeviceUUID" jdbcType="VARCHAR"/>
+            <result property="documentoHash" column="DocumentoHash" jdbcType="VARCHAR"/>
+            <result property="subTiendaID" column="SubTiendaID" jdbcType="VARCHAR"/>
+            <result property="documentoIntercambioNo" column="DocumentoIntercambioNo" jdbcType="BIGINT"/>
+            <result property="bloqueado" column="Bloqueado" jdbcType="TINYINT"/>
+            <result property="anulado" column="Anulado" jdbcType="TINYINT"/>
+            <result property="modificando" column="Modificando" jdbcType="TINYINT"/>
+            <result property="emailMandado" column="EmailMandado" jdbcType="TINYINT"/>
+            <result property="progressID" column="ProgressID" jdbcType="TINYINT"/>
+            <result property="progressStatus" column="ProgressStatus" jdbcType="TINYINT"/>
+            <result property="logID" column="LogID" jdbcType="BIGINT"/>
+            <result property="hayAdjunto" column="HayAdjunto" jdbcType="TINYINT"/>
+            <result property="imprimido" column="Imprimido" jdbcType="TINYINT"/>
+            <result property="observacion" column="Observacion" jdbcType="VARCHAR"/>
+            <result property="ProNombreES" column="ProNombreES" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        DocumentoNo,DocumentoNoEnServidor,DocumentoNoOriginal,
+        EmpresaID,SucursalID,Descuento,
+        Descuento2,DescuentoDirecto,ReglaIVA,
+        IVASerie,PrecioUsado,Total,
+        DescuentoTotal,DescuentoExtra,Ganancias,
+        PagoTotal,CantidadTotal,PaqueteTotal,
+        CajaTotal,VolumenPesoTotal,LineaTotal,
+        Fecha,FechaEntrada,FechaOriginal,
+        TiempoUltimoEditar,TiempoUltimoActualizar,DocumentoOrigenTipo,
+        DocumentoOrigenNo,DocumentoDestinoTipo,DocumentoDestinoNo,
+        AgenteID,TransportistaID,TransporteModoID,
+        EnvioGasto,OperadorID,VerificadorID,
+        AlmacenID,DocumentoAdjuntoSimbolo,OrdenadorNombre,
+        DeviceUUID,DocumentoHash,SubTiendaID,
+        DocumentoIntercambioNo,Bloqueado,Anulado,
+        Modificando,EmailMandado,ProgressID,
+        ProgressStatus,LogID,HayAdjunto,
+        Imprimido,Observacion
+    </sql>
+
+    <!--
+        FIX: 原先的 ProveedorID 已变更为 EmpresaID
+    -->
+    <select id="queryList" resultType="cn.entity.Albaranproveedor">
+        SELECT alp.*, prov.NombreES as ProNombreES FROM albaranproveedor AS alp , proveedor AS prov
+        WHERE 1 = 1 AND alp.EmpresaID = prov.EmpresaID
+        <if test="code != null">
+            <![CDATA[
+                    AND alp.EmpresaID like  '%${code}%'
+                ]]>
+        </if>
+        <if test="bloqueado != null">
+            <![CDATA[
+                    AND alp.Bloqueado = #{bloqueado}
+                ]]>
+        </if>
+        order by alp.Fecha desc
+    </select>
+
+    <!--
+        FIX:
+        ProveedorID -> EmpresaID
+        AlbaranProveedorNo -> DocumentoNo
+   -->
+    <select id="queryByAlbaranProveedorNo" resultType="cn.entity.Albaranproveedor">
+        SELECT alp.*,prov.NombreES as ProNombreES FROM albaranproveedor alp , proveedor prov
+        WHERE 1=1 and alp.EmpresaID = prov.EmpresaID
+        <if test="code != null">
+            <![CDATA[
+                    and alp.DocumentoNo like  '%${code}%'
+                ]]>
+        </if>
+    </select>
+</mapper>

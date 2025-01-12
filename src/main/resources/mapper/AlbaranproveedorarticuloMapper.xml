@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mapper.AlbaranproveedorarticuloMapper">
+
+    <resultMap id="BaseResultMap" type="cn.entity.Albaranproveedorarticulo">
+            <result property="documentoNo" column="DocumentoNo" jdbcType="BIGINT"/>
+            <result property="articuloID" column="ArticuloID" jdbcType="VARCHAR"/>
+            <result property="propCount" column="PropCount" jdbcType="SMALLINT"/>
+            <result property="propID1" column="PropID1" jdbcType="VARCHAR"/>
+            <result property="propID2" column="PropID2" jdbcType="VARCHAR"/>
+            <result property="propiedad" column="Propiedad" jdbcType="VARCHAR"/>
+            <result property="serialNo" column="SerialNo" jdbcType="VARCHAR"/>
+            <result property="codigoBarra" column="CodigoBarra" jdbcType="VARCHAR"/>
+            <result property="codigoBarraBalanza" column="CodigoBarraBalanza" jdbcType="TINYINT"/>
+            <result property="nombreES" column="NombreES" jdbcType="VARCHAR"/>
+            <result property="nombreCN" column="NombreCN" jdbcType="VARCHAR"/>
+            <result property="precio" column="Precio" jdbcType="DECIMAL"/>
+            <result property="cantidad" column="Cantidad" jdbcType="DECIMAL"/>
+            <result property="IVA" column="IVA" jdbcType="DECIMAL"/>
+            <result property="REQ" column="REQ" jdbcType="DECIMAL"/>
+            <result property="descuento" column="Descuento" jdbcType="DECIMAL"/>
+            <result property="descuentoCambioProhibido" column="DescuentoCambioProhibido" jdbcType="TINYINT"/>
+            <result property="precioCoste" column="PrecioCoste" jdbcType="DECIMAL"/>
+            <result property="comentario" column="Comentario" jdbcType="VARCHAR"/>
+            <result property="necesitaSerialNo" column="NecesitaSerialNo" jdbcType="TINYINT"/>
+            <result property="temporal" column="Temporal" jdbcType="TINYINT"/>
+            <result property="ordenNo" column="OrdenNo" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        DocumentoNo,ArticuloID,PropCount,
+        PropID1,PropID2,Propiedad,
+        SerialNo,CodigoBarra,CodigoBarraBalanza,
+        NombreES,NombreCN,Precio,
+        Cantidad,IVA,REQ,
+        Descuento,DescuentoCambioProhibido,PrecioCoste,
+        Comentario,NecesitaSerialNo,Temporal,
+        OrdenNo
+    </sql>
+
+    <select id="queryOne" resultType="cn.entity.Albaranproveedorarticulo">
+
+        SELECT * FROM albaranproveedorarticulo
+        WHERE 1=1
+        <if test="code != null">
+            <![CDATA[
+                    and DocumentoNo =  #{code}
+                ]]>
+        </if>
+        <if test="ArticuloID != null and ArticuloID != '' ">
+            <![CDATA[
+                    and (ArticuloID =  #{ArticuloID} or CodigoBarra =  #{ArticuloID})
+                ]]>
+        </if>
+
+    </select>
+
+    <!--
+        AlbaranProveedorNo -> DocumentoNo
+    -->
+    <select id="queryList" resultType="cn.entity.Albaranproveedorarticulo">
+
+        SELECT alvt.* FROM albaranproveedorarticulo alvt
+        WHERE 1=1
+        <if test="code != null">
+            <![CDATA[
+                    and alvt.DocumentoNo =  #{code}
+                ]]>
+        </if>
+        <if test="ArticuloID != null and ArticuloID != '' ">
+            <![CDATA[
+                    and (alvt.ArticuloID =  #{ArticuloID} or alvt.CodigoBarra =  #{ArticuloID})
+                ]]>
+        </if>
+        <if test="Bloqueado != null and Bloqueado ==-1 ">
+            <![CDATA[
+            and (COALESCE(alvt.Comentario,0) - alvt.Cantidad < 0)
+        ]]>
+        </if>
+    </select>
+
+    <update id="updateOne">
+        update albaranproveedorarticulo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="precio != null and precio != ''">
+                <![CDATA[
+                            Precio = #{precio},
+                        ]]>
+            </if>
+            <if test="comentario != null and comentario != ''">
+                <![CDATA[
+                            Comentario = Comentario + #{comentario},
+                        ]]>
+            </if>
+            <if test="comentarioMax != null and comentarioMax != ''">
+                <![CDATA[
+                            Comentario = #{comentarioMax},
+                        ]]>
+            </if>
+        </trim>
+        WHERE 1=1
+        <if test="articuloID != null and articuloID != '' ">
+            <![CDATA[
+                    and (ArticuloID =  #{articuloID} or CodigoBarra =  #{articuloID})
+                ]]>
+        </if>
+    </update>
+
+    <update id="execSql">
+        ${sql}
+    </update>
+
+    <!--
+        AlbaranProveedorNo -> DocumentoNo
+    -->
+    <select id="queryByAlbaranProveedorNo" resultType="cn.entity.Albaranproveedorarticulo">
+        SELECT * FROM albaranproveedorarticulo
+        WHERE 1=1
+        <if test="AlbaranProveedorNo != null">
+            <![CDATA[
+                    and DocumentoNo =  #{AlbaranProveedorNo}
+                ]]>
+        </if>
+    </select>
+
+</mapper>
